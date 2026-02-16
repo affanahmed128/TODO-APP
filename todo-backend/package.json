@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node server.js",
-    "dev": "npx nodemon server.js"
+    "start": "node start.js",
+    "dev": "npx nodemon start.js"
   },
   "keywords": [],
   "author": "",
@@ -19,10 +19,12 @@
     "express": "^5.2.1",
     "mongodb": "^7.1.0",
     "mongoose": "^9.2.1",
-    "nodemon": "^3.1.11",
     "winston": "^3.19.0"
   },
   "devDependencies": {
-    "jest": "^30.2.0"
+    "jest": "^30.2.0",
+    "mongodb-memory-server": "^11.0.1",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.2.2"
   }
 }

@@ -7,7 +7,10 @@ const mockFind=jest.fn();
 const Todo=require("../../models/todoModel")
 
 Todo.find=mockFind
-Todo.save=mockSave
+Todo.mockImplementation(()=>({
+    save: mockSave
+}))
+// Todo.save=mockSave
 
 
 describe("Todo Controller is invoked",() =>{
@@ -54,8 +57,18 @@ describe("Todo Controller is invoked",() =>{
             await todoController.addTodo(req,res)
             expect(mockFind).toHaveBeenCalled()
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith({message: errorMessage})
+            expect(res.json).toHaveBeenCalledWith(newTodo)
 
+        })
+
+        it("should handle the errors", async ()=>{
+            const errorMessage = "something went wrong, please try later";
+            mockSave.mockRejectedValue(new Error(errorMessage))
+
+            await todoController.addTodo(req,res);
+            expect(mockFind).toHaveBeenCalled()
+            expect(res.status).toHaveBeenCalledWith(500);
+            expect(res.json).toHaveBeenCalledWith({message: errorMessage})
         })
 
     })

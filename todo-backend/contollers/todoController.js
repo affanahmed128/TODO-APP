@@ -15,16 +15,22 @@ exports.getTodos = async(req,res) =>{
 }
 
 exports.addTodo=async(req,res) =>{
-    const title = req.body;
-    // logger.log("Adding a new todo",req.body)
-    logger.info("Adding a new todo",title.todo)
-    const newTodo=new Todo({
-      title:title.todo 
-    })
-    logger.info("Adding the todo to DB",newTodo)
-    const savedTodo=await newTodo.save()
-    logger.info("Adding the todo to DB",savedTodo)
+    try {
+        const title = req.body;
+        // logger.log("Adding a new todo",req.body)
+        logger.info("Adding a new todo",title.todo)
+        const newTodo=new Todo({
+          title:title.todo 
+        })
+        logger.info("Adding the todo to DB",newTodo)
+        const savedTodo=await newTodo.save()
+        logger.info("Adding the todo to DB",savedTodo)
 
+        res.status(200).json(savedTodo)
 
-    res.status(200).json(savedTodo)
+    } catch (error){
+       logger.error("Error while Adding the todos", error)
+       res.status(500).json({message: "something went wrong, please try later"})
+    }
+
 }
