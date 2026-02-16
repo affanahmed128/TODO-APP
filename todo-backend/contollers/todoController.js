@@ -6,7 +6,7 @@ exports.getTodos = async(req,res) =>{
     console.log("Fetching the todos from DB")
     try{
        const todos=await Todo.find();
-       logger.info(`fetched all the todos ${JSON.stringify(todos)}`)
+       logger.info(`fetched all the todos ${JSON.stringify(todos)} ${todos.length}`)
        res.status(200).json(todos)
     }catch(error){
        logger.error("Error while fetching the todos",error)
@@ -16,11 +16,11 @@ exports.getTodos = async(req,res) =>{
 
 exports.addTodo=async(req,res) =>{
     try {
-        const title = req.body;
+        const title = req.body.title;
         // logger.log("Adding a new todo",req.body)
-        logger.info("Adding a new todo",title.todo)
+        logger.info(`Adding a new todo ${title}`)
         const newTodo=new Todo({
-          title:title.todo 
+          title:title
         })
         logger.info("Adding the todo to DB",newTodo)
         const savedTodo=await newTodo.save()
