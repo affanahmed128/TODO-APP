@@ -1,52 +1,96 @@
-/* src/styles.css */
+/* ===== Global Styles ===== */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
     margin: 0;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
+/* ===== Main App Container ===== */
 .app {
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
+/* ===== Title ===== */
 h1 {
     text-align: center;
+    margin-bottom: 25px;
+    color: #333;
 }
 
+/* ===== Form ===== */
 form {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 25px;
 }
 
+/* ===== Input ===== */
 input[type="text"] {
     flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 10px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: 0.3s;
 }
 
+input[type="text"]:focus {
+    border-color: #6c63ff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+}
+
+/* ===== Buttons ===== */
 button {
-    padding: 10px 15px;
+    padding: 10px 16px;
     border: none;
-    background-color: #28a745;
+    background: #6c63ff;
     color: white;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #218838;
+    background: #574fd6;
+    transform: translateY(-2px);
 }
 
+/* ===== Todo List ===== */
 ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+}
+
+/* ===== Individual Todo Item ===== */
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+li:hover {
+    background: #eef1ff;
+    transform: translateX(5px);
+}
+
+/* ===== Delete Button Specific ===== */
+li button {
+    background: #ff4d4d;
+}
+
+li button:hover {
+    background: #e60000;
 }

@@ -5,20 +5,10 @@ const AddTodo = ({ onAdd })=>{
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
+        if(!todo) return;
         console.log(todo)
-        try{
-            const response=await fetch('http://localhost:3002/add-todo',{
-                method:"POST",
-                headers:{
-                    'Content-Type': 'application/json'
-                },
-                body:JSON.stringify({todo})
-            })
-            console.log("Response received",response)
-        }catch(err){
-            console.log("Error occured while adding todo",err)
-        }
-        
+        onAdd(todo);
+        setTodo("");
     }
     return (
         <form onSubmit={handleSubmit}>
