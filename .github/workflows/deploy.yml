@@ -1,0 +1,25 @@
+name: "Deploy to aws"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v2
+
+      - name: "Setup nodejs"
+        uses: actions/setup-node@v4
+        with:
+          node-version: "21"
+
+      - name: "Install dependencies"
+        run: npm install
+
+      - name: "Run the tests"
+        run: npm test
+
+      - name: "Deploy to aws"
+        run: pm2 restart server
