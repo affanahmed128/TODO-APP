@@ -17,9 +17,12 @@ jobs:
 
       - name: "Install dependencies"
         run: npm install
+        working-directory: ./todo-frontend
 
       - name: "Run the tests"
         run: npm test
+        working-directory: ./todo-backend
 
       - name: "Deploy to aws"
-        run: pm2 restart server
+        run: pm2 restart start.js
+        working-directory: ./todo-backend
