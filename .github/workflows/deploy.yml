@@ -1,4 +1,4 @@
-name: "Deploy to aws"
+name: Deploy to AWS
 
 on:
   workflow_dispatch:
@@ -6,23 +6,33 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+
     steps:
-      - name: "Checkout code"
-        uses: actions/checkout@v6
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: "Setup nodejs"
-        uses: actions/setup-node@v6
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
         with:
-          node-version: "24"
+          node-version: "20"
 
-      - name: "Install dependencies"
+      - name: Install frontend dependencies
         run: npm install
         working-directory: ./todo-frontend
 
-      - name: "Run the tests"
+      - name: Build frontend
+        run: npm run build
+        working-directory: ./todo-frontend
+
+      - name: Install backend dependencies
+        run: npm install
+        working-directory: ./todo-backend
+
+      - name: Run backend tests
         run: npm test
         working-directory: ./todo-backend
 
-      - name: "Deploy to aws"
-        run: pm2 restart start.js
+      - name: Deploy application
+        run: |
+          pm2 restart all
         working-directory: ./todo-backend
