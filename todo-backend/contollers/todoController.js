@@ -34,3 +34,19 @@ exports.addTodo=async(req,res) =>{
     }
 
 }
+
+exports.deleteTodo = async (req, res) => {
+    try {
+        const { id } = req.params;
+        logger.info(`Deleting todo with id ${id}`)
+        const deleted = await Todo.findByIdAndDelete(id);
+        if (!deleted) {
+            return res.status(404).json({ message: "Todo not found" });
+        }
+        logger.info(`Deleted todo ${id}`);
+        res.status(200).json({ message: "Todo deleted successfully", id });
+    } catch (error) {
+        logger.error("Error while deleting the todo", error)
+        res.status(500).json({ message: "Something went wrong, please try later" })
+    }
+}

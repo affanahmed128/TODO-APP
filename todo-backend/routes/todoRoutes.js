@@ -1,10 +1,12 @@
 const express = require("express")
-const {getTodos, addTodo} = require("../contollers/todoController")
+const {getTodos, addTodo, deleteTodo} = require("../contollers/todoController")
 
 const router = express.Router()
 router.get("/get-todos",getTodos)
 
 router.post("/add-todo",addTodo)
+
+router.delete("/delete-todo/:id", deleteTodo)
 
 router.get("/health", (req,res)=>{
     try{

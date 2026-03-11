@@ -40,22 +40,18 @@ const TodoList = () =>{
         }
     }
 
-    const deleteTodo = async (title) =>{
-        console.log("Adding todo", title)
+    const deleteTodo = async (id) => {
         try {
-            const response = await fetch(`${BACKEND_URL}/add-todo`,{
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({title})
+            const response = await fetch(`${BACKEND_URL}/delete-todo/${id}`, {
+                method: "DELETE"
             })
-            console.log("response is", response)
-            const newTodo = await response.json();
-            setTodos((prev)=> [...prev, newTodo])
-            console.log("Response received", response)
+            if (response.ok) {
+                setTodos((prev) => prev.filter(todo => todo._id !== id))
+            } else {
+                console.error("Failed to delete todo")
+            }
         } catch (error) {
-            console.error("Error while creating the todo", error)
+            console.error("Error while deleting the todo", error)
         }
     }
 
@@ -66,7 +62,7 @@ const TodoList = () =>{
             <ul>
                 {
                     todos.map( todo => (
-                        <TodoItem key={todo._id} todo={todo}></TodoItem>
+                        <TodoItem key={todo._id} todo={todo} onDelete={deleteTodo}></TodoItem>
                     ))
                 }
             </ul>
