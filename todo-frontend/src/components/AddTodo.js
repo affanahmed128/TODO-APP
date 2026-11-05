@@ -1,8 +1,10 @@
 import React , {useState} from 'react'
 
+// AddTodo renders the input form used to create a new task in the list.
 const AddTodo = ({ onAdd })=>{
     const [todo, setTodo] = useState('')
 
+    // Submits the typed task title to the parent component for backend storage.
     const handleSubmit = async (e) =>{
         e.preventDefault();
         if(!todo) return;

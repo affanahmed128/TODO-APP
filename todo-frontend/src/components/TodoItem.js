@@ -1,5 +1,6 @@
 import React from "react"
 
+// TodoItem displays a single task and includes the delete action for that item.
 const TodoItem = ({ todo, onDelete ,onComplete }) => {
     return (
         <li>

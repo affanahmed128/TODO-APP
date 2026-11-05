@@ -4,13 +4,16 @@ import AddTodo from "./AddTodo"
 import TodoItem from "./TodoItem"
 import BACKEND_URL from "../config/config"
 
+// TodoList loads saved tasks and manages add/delete actions for the entire todo list.
 const TodoList = () =>{
     const [todos, setTodos] = useState([]);
 
+    // Fetch the existing tasks from the backend when the component first loads.
     useEffect(()=>{
         fetchTodos();
     }, [])
 
+    // Retrieves all todo items from the API and stores them in local state.
     const fetchTodos = async () =>{
         try {
             const response = await fetch(`${BACKEND_URL}/get-todos`)
@@ -21,6 +24,7 @@ const TodoList = () =>{
         }
     }
 
+    // Sends a new title to the backend and updates the list with the created item.
     const addTodo = async (title) =>{
         console.log("Adding todo", title)
         try {
@@ -40,6 +44,7 @@ const TodoList = () =>{
         }
     }
 
+    // Deletes a task by id and removes it from the UI after the backend confirms deletion.
     const deleteTodo = async (id) => {
         try {
             const response = await fetch(`${BACKEND_URL}/delete-todo/${id}`, {
