@@ -1,3 +1,4 @@
+// Configures the shared Winston logger for console output and combined log files.
 const winston = require('winston');
 
 const logger = winston.createLogger({

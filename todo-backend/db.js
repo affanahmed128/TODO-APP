@@ -1,3 +1,4 @@
+// Connects Mongoose to the MongoDB database configured by the MONGO_URI environment variable.
 const mongoose = require("mongoose")
 const logger = require("./utils/logger")
 const connectDB = async () => {

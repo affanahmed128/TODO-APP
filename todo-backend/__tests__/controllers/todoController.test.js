@@ -1,3 +1,4 @@
+// Unit-tests todo controller behavior with mocked model operations and responses.
 const todoController=require("../../contollers/todoController")
 
 jest.mock("../../models/todoModel.js")

@@ -1,3 +1,4 @@
+// Integration-tests todo API endpoints against an isolated in-memory MongoDB database.
 const request = require("supertest")
 const {MongoMemoryServer} = require("mongodb-memory-server")
 const mongoose = require("mongoose")

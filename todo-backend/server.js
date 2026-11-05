@@ -1,3 +1,4 @@
+// Configures the Express application, middleware, API routes, and MongoDB connection.
 const express = require("express")
 const cors = require("cors")
 const bodyParser = require("body-parser")

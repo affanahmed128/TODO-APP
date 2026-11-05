@@ -1,3 +1,4 @@
+// Defines the MongoDB document schema and model used to store todo items.
 const mongoose = require("mongoose")
 
 const todoSchema = new mongoose.Schema({

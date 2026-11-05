@@ -1,3 +1,4 @@
+// Implements the API handlers for listing, creating, and deleting todos.
 const Todo = require("../models/todoModel")
 const logger= require("../utils/logger")
 

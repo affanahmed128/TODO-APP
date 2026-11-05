@@ -1,3 +1,4 @@
+// Maps todo CRUD and health-check API endpoints to their handlers.
 const express = require("express")
 const {getTodos, addTodo, deleteTodo} = require("../contollers/todoController")
 
@@ -18,4 +19,3 @@ router.get("/health", (req,res)=>{
 })
 
 module.exports=router;
-
