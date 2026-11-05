@@ -15,7 +15,7 @@ This project demonstrates a basic CRUD workflow for todos across two separate ap
 
 - Backend: Node.js, Express, MongoDB, Mongoose
 - Frontend: React, JavaScript, CSS
-- Testing: Jest, Supertest, React Testing Library
+- Testing: Jest, Supertest, React Testing Library, Selenium WebDriver
 - Logging: Winston
 
 ## Project Structure
@@ -153,6 +153,13 @@ Run frontend tests:
 ```bash
 cd todo-frontend
 npm test -- --watch=false
+```
+
+Run Selenium end-to-end tests (with Chrome, the backend, MongoDB, and frontend running):
+
+```bash
+cd todo-frontend
+npm run test:e2e
 ```
 
 ## Notes

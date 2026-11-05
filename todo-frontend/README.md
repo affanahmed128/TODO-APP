@@ -19,6 +19,10 @@ You may also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run test:e2e`
+
+Runs a Selenium end-to-end test in headless Chrome. Install the frontend dependencies and make sure Chrome, the backend (including its MongoDB connection), and the frontend are running first. By default, the test uses `http://localhost:3000` and `http://localhost:3002/api`; override these with `FRONTEND_URL` and `BACKEND_URL` if needed. Selenium Manager obtains a compatible ChromeDriver when required.
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\

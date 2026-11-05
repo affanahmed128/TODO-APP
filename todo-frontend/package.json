@@ -16,6 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:e2e": "node --test e2e/todo.e2e.test.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,6 +38,7 @@
     ]
   },
   "devDependencies": {
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "selenium-webdriver": "^4.52.0"
   }
 }
