@@ -162,6 +162,14 @@ cd todo-frontend
 npm run test:e2e
 ```
 
+## Continuous integration
+
+The GitHub Actions workflow in `.github/workflows/ci.yml` runs on pushes,
+pull requests, and manual dispatches. It installs dependencies from each
+application's lockfile, runs backend and frontend tests, and builds the
+frontend. The Selenium end-to-end test is not part of CI because it requires
+the application services and a browser to be started.
+
 ## Notes
 
 - The frontend connects to the backend using `http://localhost:3002/api`.
