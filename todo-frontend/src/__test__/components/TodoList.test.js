@@ -1,6 +1,6 @@
 import React from "react"
 
-import {render, fireEvent, screen, cleanup, waitFor} from "@testing-library/react"
+import {render, fireEvent, screen, cleanup} from "@testing-library/react"
 import TodoList from "../../components/TodoList"
 import BACKEND_URL from "../../config/config"
 
@@ -25,10 +25,8 @@ describe("Todo List component", ()=>{
 
         render(<TodoList/>);
 
-        await waitFor(()=>{
-            expect(screen.getByText("Todo 1")).toBeInTheDocument();
-            expect(screen.getByText("Todo 2")).toBeInTheDocument();
-        })
+        expect(await screen.findByText("Todo 1")).toBeInTheDocument();
+        expect(await screen.findByText("Todo 2")).toBeInTheDocument();
 
         expect(fetch).toHaveBeenCalledWith(`${BACKEND_URL}/get-todos`)
     })
@@ -49,9 +47,7 @@ describe("Todo List component", ()=>{
         fireEvent.change(input,{ target: {value: "New Todo"}});
         fireEvent.click(button);
 
-        await waitFor(()=>{
-            expect(screen.getByText("New Todo")).toBeInTheDocument();
-        })
+        expect(await screen.findByText("New Todo")).toBeInTheDocument();
 
         expect(fetch).toHaveBeenCalledWith(`${BACKEND_URL}/add-todo`, expect.any(Object))
     })
