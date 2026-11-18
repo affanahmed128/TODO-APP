@@ -6,7 +6,7 @@ const logger= require("../utils/logger")
 exports.getTodos = async(req,res) =>{
     console.log("Fetching the todos from DB")
     try{
-       const todos=await Todo.find();
+       const todos=await Todo.find({ completed: { $ne: true } });
        logger.info(`fetched all the todos ${JSON.stringify(todos)} ${todos.length}`)
        res.status(200).json(todos)
     }catch(error){
@@ -39,15 +39,19 @@ exports.addTodo=async(req,res) =>{
 exports.deleteTodo = async (req, res) => {
     try {
         const { id } = req.params;
-        logger.info(`Deleting todo with id ${id}`)
-        const deleted = await Todo.findByIdAndDelete(id);
-        if (!deleted) {
+        logger.info(`Completing todo with id ${id}`)
+        const completed = await Todo.findByIdAndUpdate(
+            id,
+            { completed: true, completedAt: new Date() },
+            { returnDocument: "after" }
+        );
+        if (!completed) {
             return res.status(404).json({ message: "Todo not found" });
         }
-        logger.info(`Deleted todo ${id}`);
-        res.status(200).json({ message: "Todo deleted successfully", id });
+        logger.info(`Completed todo ${id}`);
+        res.status(200).json({ message: "Todo completed successfully", id });
     } catch (error) {
-        logger.error("Error while deleting the todo", error)
+        logger.error("Error while completing the todo", error)
         res.status(500).json({ message: "Something went wrong, please try later" })
     }
 }

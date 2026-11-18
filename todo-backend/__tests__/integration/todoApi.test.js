@@ -48,5 +48,23 @@ describe("Todo API Integeration test", () =>{
                 expect(todo).toBeTruthy();
                 expect(todo.title).toBe("New Todo")
             })
-        })        
+        })
+        describe("DELETE /api/delete-todo/:id", () => {
+            it("should mark the todo as completed without deleting it", async () => {
+                const todo = await Todo.create({ title: "Complete me" })
+
+                const response = await request(app).delete(`/api/delete-todo/${todo._id}`)
+
+                expect(response.status).toBe(200)
+                expect(response.body.message).toBe("Todo completed successfully")
+
+                const savedTodo = await Todo.findById(todo._id)
+                expect(savedTodo).toBeTruthy()
+                expect(savedTodo.completed).toBe(true)
+                expect(savedTodo.completedAt).toBeInstanceOf(Date)
+
+                const listResponse = await request(app).get("/api/get-todos")
+                expect(listResponse.body.some(item => item._id === todo.id)).toBe(false)
+            })
+        })
 })

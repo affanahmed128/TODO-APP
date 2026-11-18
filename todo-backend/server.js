@@ -5,7 +5,7 @@ const bodyParser = require("body-parser")
 const dotenv = require("dotenv")
 const connectDB = require("./db")
 const todoRoutes = require("./routes/todoRoutes")
-dotenv.config()
+dotenv.config({ path: [".env.local", ".env"] })
 
 const app = express();
 app.use(cors())

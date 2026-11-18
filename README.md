@@ -63,14 +63,18 @@ Before running this project, make sure you have installed:
 
 ## Configuration
 
-The backend uses environment variables defined in `todo-backend/.env`:
+The backend loads environment variables from `todo-backend/.env.local` first, then
+`todo-backend/.env`. Use `.env.local` for machine-specific credentials; it is
+ignored by Git.
 
 ```env
-MONGO_URI=mongodb://127.0.0.1:27017/todoapp
+MONGO_URI=mongodb+srv://<username>:<url-encoded-password>@<cluster-host>/<database>
 PORT=3002
 ```
 
-If MongoDB is not running locally, start it first or update `MONGO_URI` to point to your database.
+Set `MONGO_URI` to your MongoDB connection string. URL-encode special characters
+in the username or password (for example, `@` as `%40`). If using a local
+MongoDB instance, use a local connection string instead.
 
 ## Getting Started
 
