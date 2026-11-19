@@ -6,7 +6,7 @@ const logger= require("../utils/logger")
 exports.getTodos = async(req,res) =>{
     console.log("Fetching the todos from DB")
     try{
-       const todos=await Todo.find({ completed: { $ne: true } });
+       const todos=await Todo.find({ completed: false });
        logger.info(`fetched all the todos ${JSON.stringify(todos)} ${todos.length}`)
        res.status(200).json(todos)
     }catch(error){

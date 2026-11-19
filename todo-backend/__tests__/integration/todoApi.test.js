@@ -23,9 +23,10 @@ describe("Todo API Integeration test", () =>{
         }
 });
         describe("GET /api/get-todos",()=>{
-            it("should return all the todos", async () =>{
+            it("should return only active todos", async () =>{
                 await Todo.create({title: "Todo 1"})
                 await Todo.create({title: "Todo 2"})
+                await Todo.create({title: "Completed todo", completed: true})
 
                 const response = await request(app).get("/api/get-todos");
                 console.log("Response from the /api/get-todos test", response.body)
@@ -47,6 +48,7 @@ describe("Todo API Integeration test", () =>{
                 console.log("Response is ",todo);
                 expect(todo).toBeTruthy();
                 expect(todo.title).toBe("New Todo")
+                expect(todo.completed).toBe(false)
             })
         })
         describe("DELETE /api/delete-todo/:id", () => {

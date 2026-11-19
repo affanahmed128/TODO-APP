@@ -1,6 +1,6 @@
 import React from "react"
 
-import {render, fireEvent, screen, cleanup} from "@testing-library/react"
+import {render, fireEvent, screen, cleanup, waitFor} from "@testing-library/react"
 import TodoList from "../../components/TodoList"
 import BACKEND_URL from "../../config/config"
 
@@ -52,6 +52,25 @@ describe("Todo List component", ()=>{
         expect(fetch).toHaveBeenCalledWith(`${BACKEND_URL}/add-todo`, expect.any(Object))
     })
 
-    // TODO: Write the integ tests for deletion of todos
+    test("Delete a Todo and hide it after the backend completes it", async () => {
+        const todo = {_id: "1", title: "Todo to complete", completed: false}
+        fetch.mockResolvedValueOnce({
+            json: async () => [todo]
+        }).mockResolvedValueOnce({
+            ok: true
+        })
+
+        render(<TodoList />)
+
+        expect(await screen.findByText("Todo to complete")).toBeInTheDocument()
+        fireEvent.click(screen.getByRole("button", {name: "Delete"}))
+
+        await waitFor(() => {
+            expect(screen.queryByText("Todo to complete")).not.toBeInTheDocument()
+        })
+        expect(fetch).toHaveBeenLastCalledWith(`${BACKEND_URL}/delete-todo/1`, {
+            method: "DELETE"
+        })
+    })
 
 })
