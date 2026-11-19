@@ -15,7 +15,7 @@ describe("Todo API Integeration test", () =>{
         console.log("Mongo server uri is", mongoUri)
         await mongoose.disconnect()
         await mongoose.connect(mongoUri)   
-    })
+    }, 120000)
     afterAll(async () =>{
         await mongoose.disconnect();
         if (monogoServer) {
